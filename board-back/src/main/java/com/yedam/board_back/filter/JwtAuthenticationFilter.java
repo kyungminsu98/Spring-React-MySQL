@@ -14,6 +14,8 @@ import org.springframework.util.StringUtils;
 
 import com.yedam.board_back.provider.JwtProvider;
 
+import org.springframework.lang.NonNull;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,10 +30,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
     private final JwtProvider jwtProvider;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(@NonNull HttpServletRequest request, 
+                                    @NonNull HttpServletResponse response, 
+                                    @NonNull FilterChain filterChain) throws ServletException, IOException {
         try{
-
+            
             String token = parseBearerToken(request);
             if(token == null){
                 filterChain.doFilter(request, response);
@@ -57,9 +60,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
         filterChain.doFilter(request, response);
     }
 
-    private String parseBearerToken(HttpServletRequest requset){
+    private String parseBearerToken(HttpServletRequest request){
 
-        String authorization = requset.getHeader("Authorization");
+        String authorization = request.getHeader("Authorization");
 
         boolean hasAuthorization = StringUtils.hasText(authorization);
         if(!hasAuthorization) return null;
