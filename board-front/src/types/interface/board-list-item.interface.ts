@@ -5,7 +5,7 @@ export default interface BoardListItem{
     boardTitleImage: string | null;
     favoriteCount: number;
     commentCount: number;
-    viewCouint: number;
+    viewCount: number;
     writeDatetime: string;
     writerNickname: string;
     writerProfileImage: string | null;
