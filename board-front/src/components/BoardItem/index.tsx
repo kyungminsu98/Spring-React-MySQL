@@ -16,7 +16,7 @@ export default function BoardItem({boardListItem}:Props) {
      navigator(boardNumber);
  }
 
-// properties //
+// state: properties //
     const{boardNumber, title, content, boardTitleImage} = boardListItem;
     const{favoriteCount, commentCount, viewCount} = boardListItem;
     const{writeDatetime, writerNickname, writerProfileImage} = boardListItem;

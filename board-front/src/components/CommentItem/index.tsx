@@ -5,11 +5,11 @@ import defaultProfileImage from 'assets/image/default-profile-image.png';
 interface Props{
     commentListItem: CommentListItem;
 }
-// compnent: comment List Item 컴포넌트 //
+// component: comment List Item 컴포넌트 //
 export default function CommentItem({commentListItem}: Props) {
-// properties //
+// state: properties //
     const {nickname, profileImage, writeDatetime, content} = commentListItem;
-// compnent: comment List Item 랜더링 //
+// component: comment List Item 랜더링 //
   return (
     <div className='commnet-list-item'>
         <div className='commnet-list-item-top'>
