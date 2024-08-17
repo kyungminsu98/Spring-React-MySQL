@@ -1,4 +1,3 @@
-import React from 'react'
 import './style.css';
 import Footer from 'layouts/Footer';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -15,7 +14,7 @@ const { pathname } = useLocation();
     <>
         <Header/>
         <Outlet/>
-        {pathname !== AUTH_PATH() && <Footer/>} 
+        {pathname !== AUTH_PATH() && <Footer />} 
     </>
   )
 }

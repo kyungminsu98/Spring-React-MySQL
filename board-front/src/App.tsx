@@ -1,6 +1,6 @@
-import Footer from 'layouts/Footer';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import Container from './layouts/Container/index';
 import Authentication from 'views/Authentication';
 import Main from 'views/Main';
 import User from 'views/User';
@@ -24,9 +24,7 @@ function App() {
 // description: 게시물 수정하기 : '/board/update:boardNumber'- BoardUpdate //
 return (
   <Routes>
-    <Route>
-      
-    </Route>
+    <Route element={<Container/>}>
     <Route path={MAIN_PATH()} element={<Main/>}/>
     <Route path={AUTH_PATH()} element={<Authentication/>}/>
     <Route path={SEARCH_PATH(':searchWord')} element={<Search/>}/>
@@ -36,7 +34,8 @@ return (
       <Route path={BOARD_DETAIL_PATH(':boardNumber')} element={<BoardDetail/>}/>
       <Route path={BOARD_UPDATE_PATH(':boardNumber')} element={<BoardUpdate/>}/>
     </Route>
-    <Route path='*' element={<h1>404 Not Found</h1>}></Route>
+    <Route path='*' element={<h1>404 Not Found</h1>}/>
+    </Route>
   </Routes>
   );
 }
