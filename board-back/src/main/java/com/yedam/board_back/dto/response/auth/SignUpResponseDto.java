@@ -1,4 +1,4 @@
-package com.yedam.board_back.dto.response.request.auth;
+package com.yedam.board_back.dto.response.auth;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
