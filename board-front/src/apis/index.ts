@@ -10,6 +10,6 @@ const SIGN_UP_URL = () => `${API_DOMAIN}/auth/sign-up`
 export const signInRequest = (requestBody: SignInRequestDto) => {
 
 }
-export const SignUpRequest = (requestBody: SignUpRequestDto) => {
+export const signUpRequest = (requestBody: SignUpRequestDto) => {
 
 }
