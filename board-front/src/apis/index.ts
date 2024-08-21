@@ -11,7 +11,7 @@ const SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in`
 const SIGN_UP_URL = () => `${API_DOMAIN}/auth/sign-up`
 
 export const signInRequest = async(requestBody: SignInRequestDto) => {
-    const result = await axios.post(SIGN_IN_URL(), requestBody)
+    const result = await axios.post<SignInResponseDto>(SIGN_IN_URL(), requestBody)
         .then(response =>{
             const responseBody: SignInResponseDto = response.data;
             return responseBody;
