@@ -18,7 +18,7 @@ enum ResponseCode{
    NO_PERMISSION = "NP",
 
    // HTTP Status 500
-   DATABASE_ERROR = "DBA",
+   DATABASE_ERROR = "DBE",
 }
 
 export default ResponseCode;

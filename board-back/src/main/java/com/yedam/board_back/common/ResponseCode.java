@@ -23,5 +23,5 @@ public interface ResponseCode {
     String NO_PERMISSION = "NP";
 
     // HTTP Status 500
-    String DATABASE_ERROR = "DBA";
+    String DATABASE_ERROR = "DBE";
 }
