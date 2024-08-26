@@ -24,6 +24,10 @@ public class FileServiceImpl implements FileService {
         if (file.isEmpty()) return null;
 
         String originalFileName = file.getOriginalFilename();
+        if (originalFileName == null || originalFileName.isEmpty()) {
+            return null;  // Original file name is required
+        }
+        
         String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
         String uuid = UUID.randomUUID().toString();
         String saveFileName = uuid + extension;

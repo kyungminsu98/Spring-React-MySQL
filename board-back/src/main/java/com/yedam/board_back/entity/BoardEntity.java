@@ -25,7 +25,7 @@ public class BoardEntity {
     private int boardNumber;
     private String title;
     private String content;
-    private String writerDatetime;
+    private String writeDatetime;
     private int favoriteCount;
     private int commentCount;
     private int viewCount;
@@ -34,11 +34,11 @@ public class BoardEntity {
     public BoardEntity(PostBoardRequestDto dto, String email){
         Date now = Date.from(Instant.now());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String writerDatetime = simpleDateFormat.format(now);
+        String writeDatetime = simpleDateFormat.format(now);
         
         this.title = dto.getTitle();
         this.content = dto.getContent();
-        this.writerDatetime = writerDatetime;
+        this.writeDatetime = writeDatetime;
         this.favoriteCount = 0;
         this.commentCount = 0;
         this.viewCount = 0;

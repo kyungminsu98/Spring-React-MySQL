@@ -4,6 +4,8 @@ import { ResponseDto } from './response';
 import { SignInResponseDto, SignUpResponseDto } from './response/auth';
 import { error } from 'console';
 import { GetSignInUserResponseDto } from './response/user';
+import { PostBoardRequestDto } from './request/board';
+import { PostBoardResponseDto } from './response/board';
 
 const DOMAIN = 'http://localhost:4000';
 
@@ -42,29 +44,48 @@ export const signUpRequest = async(requestBody: SignUpRequestDto) => {
 }
 const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/user`;
 
-// export const getSignInUserRequest = async (accessToken:string) =>{
-//     const result = await axios.get(GET_SIGN_IN_USER_URL(), authorization(accessToken));
-//         .then(response =>{
-//             const responseBody: GetSignInUserResponseDto = response.data;
-//             return responseBody;
-//         })
-//         .catch(error =>{
-//             if(!error.response) return null;
-//             const responseBody: ResponseDto = error.response.data;
-//             return responseBody;
-//         });
-//         return result;
-// }
+export const getSignInUserRequest = async (accessToken: string) => {
+    const result = await axios.get<GetSignInUserResponseDto>(GET_SIGN_IN_USER_URL(), authorization(accessToken))
+        .then((response) => {
+            const responseBody: GetSignInUserResponseDto = response.data;
+            return responseBody;
+        })
+        .catch((error) => {
+            if (!error.response) return null;
+            const responseBody: ResponseDto = error.response.data;
+            return responseBody;
+        });
+    return result;
+}
 
-export const getSignInUserRequest = async (accessToken: string): Promise<GetSignInUserResponseDto | ResponseDto | null> => {
-    try {
-        // GET 요청을 보내고 응답을 반환
-        const response = await axios.get<GetSignInUserResponseDto>(GET_SIGN_IN_USER_URL(), authorization(accessToken));
-        return response.data;
-    } catch (error: any) {
-        // 오류가 발생한 경우, 적절한 응답을 반환
-        if (!error.response?.data) return null;
-        return error.response.data as ResponseDto;
-    }
+const POST_BOARD_URL = () => `${API_DOMAIN}/board`;
+export const postBoardRequest = async (requestBody:PostBoardRequestDto, accessToken:string) =>{
+    const result = await axios.post<PostBoardResponseDto>(POST_BOARD_URL(), requestBody, authorization(accessToken))
+        .then((response) => {
+            const responseBody: PostBoardResponseDto = response.data;
+            return responseBody;
+        })
+        .catch((error) => {
+            if(!error.response) return null;
+            const responseBody: ResponseDto = error.response.data
+            return responseBody;
+        })
+    return result;
+}
+
+const FILE_DOMAIN = `${DOMAIN}/file`;
+const FILE_UPLOAD_URL = () => `${FILE_DOMAIN}/upload`;
+const multipartFormData = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+export const fileUploadRequest = async (data: FormData) => {
+    const result = await axios.post<string>(FILE_UPLOAD_URL(), data, multipartFormData)
+        .then(response => {
+            const responseBody: string = response.data;
+            return responseBody;
+        })
+        .catch(error => {
+            console.error("File upload error: ", error);
+            return null;
+        });
+    return result;
 };
-
