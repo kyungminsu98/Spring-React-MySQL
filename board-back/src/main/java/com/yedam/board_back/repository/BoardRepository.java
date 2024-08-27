@@ -10,6 +10,7 @@ import com.yedam.board_back.repository.resultSet.GetBoardResultSet;
 @Repository
 public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
     
+    boolean existsByBoardNumber(Integer boardNumber);
     BoardEntity findByBoardNumber(Integer boardNumber);
     
     @Query(
@@ -27,4 +28,6 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
         nativeQuery = true
     )
     GetBoardResultSet getBoard(Integer boardNumber);
+
+    
 }
