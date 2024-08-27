@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yedam.board_back.dto.request.board.PostBoardRequestDto;
 import com.yedam.board_back.dto.response.board.GetBoardResponseDto;
+import com.yedam.board_back.dto.response.board.GetFavoriteListResponseDto;
 import com.yedam.board_back.dto.response.board.PostBoardResponseDto;
 import com.yedam.board_back.dto.response.board.PutFavoriteResponseDto;
 import com.yedam.board_back.service.BoardService;
@@ -52,4 +53,13 @@ public class BoardController {
         ResponseEntity<? super PutFavoriteResponseDto> response = boardService.putFavorite(boardNumber, email);
         return response;
     }
+
+    @GetMapping("/{boardNumber}/favorite-lis")
+    public ResponseEntity<? super GetFavoriteListResponseDto> getFavoriteList(
+        @PathVariable("boardNumber") Integer boardNumber
+    ){
+        ResponseEntity<? super GetFavoriteListResponseDto> response = boardService.getFavoriteList(boardNumber);
+        return response;
+    }
+    
 }
