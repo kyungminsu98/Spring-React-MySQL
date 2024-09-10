@@ -16,6 +16,7 @@ import com.yedam.board_back.dto.request.board.PostCommentRequestDto;
 import com.yedam.board_back.dto.response.board.GetBoardResponseDto;
 import com.yedam.board_back.dto.response.board.GetCommentListResponseDto;
 import com.yedam.board_back.dto.response.board.GetFavoriteListResponseDto;
+import com.yedam.board_back.dto.response.board.IncreaseViewCountResponseDto;
 import com.yedam.board_back.dto.response.board.PostBoardResponseDto;
 import com.yedam.board_back.dto.response.board.PostCommentResponseDto;
 import com.yedam.board_back.dto.response.board.PutFavoriteResponseDto;
@@ -80,6 +81,14 @@ public class BoardController {
         @PathVariable("boardNumber") Integer boardNumber
     ){
         ResponseEntity<? super GetCommentListResponseDto> response = boardService.getCommentList(boardNumber);
+        return response;
+    }
+    
+    @GetMapping("/{boardNumber}/increase-view-count")
+    public ResponseEntity<? super IncreaseViewCountResponseDto> increaseViewCount(
+        @PathVariable("boardNumber") Integer boardNumber
+    ){
+        ResponseEntity<? super IncreaseViewCountResponseDto> response = boardService.increaseViewCount(boardNumber);
         return response;
     }
 }
