@@ -9,10 +9,12 @@ import DefaultProfileImage from 'assets/image/default-profile-image.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useLoginUserStroe } from 'stores';
 import { BOARD_PATH, BOARD_UPDATE_PATH, MAIN_PATH, USER_PATH } from 'constant';
-import { getBoardRequest, increaseViewCountRequest } from 'apis';
+import { getBoardRequest, getCommentListRequest, getFavoriteListRequest, increaseViewCountRequest } from 'apis';
 import GetBoardResponseDto from 'apis/response/board/get-board-response.dto';
 import { ResponseDto } from 'apis/response';
-import { IncreaseViewCountResponseDto } from 'apis/response/board';
+import { GetCommentListResponseDto, GetFavoriteListResponseDto, IncreaseViewCountResponseDto } from 'apis/response/board';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 
 // component: 게시물 상세 화면 컴포넌트 //
 export default function BoardDetail() {
@@ -37,6 +39,13 @@ const increaseViewCountResponse = (responseBody: IncreaseViewCountResponseDto | 
   const [board, setBoard] = useState<Board | null>(null);
 // state: more 버튼 상태
   const [showMore, setShowMore] = useState<boolean>(false);
+// function: 작성일 포맷 변경 함수 //
+const getWriteDatetimeFormat = () =>{
+  if(!board) return '';
+  const date = dayjs(board.writeDatetime);
+  return date.format('YYYY. MM. DD.');
+}
+
 // function: getBoardResponse 처리 함수 //
   const getBoardResponse = (responseBody: GetBoardResponseDto | ResponseDto | null) =>{
     if(!responseBody) return;
@@ -100,7 +109,7 @@ const increaseViewCountResponse = (responseBody: IncreaseViewCountResponseDto | 
               </div>
               <div className='board-detail-writer-nickname' onClick={onNicknameClickHandler}>{board.writerNickname}</div>
               <div className='board-detail-info-divider'>{'\|'}</div>
-              <div className='board-detail-write-date'>{board.writeDatetime}</div>
+              <div className='board-detail-write-date'>{getWriteDatetimeFormat()}</div>
             </div>
             {isWriter &&
             <div className='icon-button' onClick={onMoreButtonClickHandler}>
@@ -143,6 +152,37 @@ const commentRef = useRef<HTMLTextAreaElement | null>(null);
 // state: 댓글 상태 //
     const [comment, setComment] = useState<string>('');
 
+
+// function: getFavoriteListResponse 처리 함수//
+  const getFavoriteListResponse = (responseBody: GetFavoriteListResponseDto | ResponseDto | null) =>{
+    if(!responseBody) return;
+
+    const {code} = responseBody;
+    if(code === 'NB') alert('존재하지 않는 게시물입니다.');
+    if(code === 'DBE') alert('데이터베이스 오류입니다.');
+    if(code !== 'SU') return;
+
+    const {favoriteList} = responseBody as GetFavoriteListResponseDto;
+    setFavoriteList(favoriteList);
+    
+    if(!loginUser) {
+      setFavorite(false);
+      return;
+    }
+    const isFavorite = favoriteList.findIndex(favorite => favorite.email === loginUser.email) !== -1;
+    setFavorite(isFavorite);
+  }
+// function: getCommentListResponse 처리 함수 //
+  const getCommentListResponse = (responseBody: GetCommentListResponseDto | ResponseDto | null) => {
+    if(!responseBody) return;
+    const {code} = responseBody;
+    if(code === 'NB') alert('존재하지 않는 게시물입니다.');
+    if(code === 'DBE') alert('데이터베이스 오류입니다.');
+    if(code !== 'SU') return;
+
+    const {commentList} = responseBody as GetCommentListResponseDto;
+    setCommentList(commentList);
+  }
 // event handler: 좋아요 클릭 이벤트 처리 //
     const onFavoriteClickHandler = () => {
       setFavorite(!isFavorite);
@@ -170,8 +210,10 @@ const commentRef = useRef<HTMLTextAreaElement | null>(null);
     }
 // effect: 게시물 번호 path variable이 바뀔때 마다 좋아요 및 댓글 리스트 불러오기 //
     useEffect(()=>{
-      setFavoriteList(favoriteListMock);
-      setCommentList(commentListMock);
+
+      if(!boardNumber) return;
+      getFavoriteListRequest(boardNumber).then(getFavoriteListResponse);
+      getCommentListRequest(boardNumber).then(getCommentListResponse);
     },[boardNumber])
 
   // render: 게시물 상세 하단 랜더링 //
@@ -227,6 +269,7 @@ const commentRef = useRef<HTMLTextAreaElement | null>(null);
           <div className='devider'></div>
           <div className='board-detail-bottom-comment-pagination-box'>
           </div>
+          {loginUser !== null &&
           <div className='board-detail-bottom-comment-input-box'>
             <div className='board-detail-bottom-comment-input-container'>
               <textarea ref={commentRef} className='board-detail-bottom-comment-textarea' placeholder='댓글을 작성해주세요.' value={comment} onChange={onCommentChangeHandler}/>
@@ -235,6 +278,7 @@ const commentRef = useRef<HTMLTextAreaElement | null>(null);
               </div>
             </div>
           </div>
+          }
         </div>
         }
       </div>
