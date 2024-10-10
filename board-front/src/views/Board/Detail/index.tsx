@@ -2,7 +2,6 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import './style.css';
 import FavoriteItem from 'components/FavoriteItem';
 import { Board, CommentListItem, FavoriteListItem } from 'types/interface';
-import { boardMock, commentListMock, favoriteListMock } from 'mocks';
 import CommentItem from 'components/CommentItem';
 import Pagination from 'components/Pagination';
 import DefaultProfileImage from 'assets/image/default-profile-image.png';
@@ -39,6 +38,7 @@ const increaseViewCountResponse = (responseBody: IncreaseViewCountResponseDto | 
   const [board, setBoard] = useState<Board | null>(null);
 // state: more 버튼 상태
   const [showMore, setShowMore] = useState<boolean>(false);
+
 // function: 작성일 포맷 변경 함수 //
 const getWriteDatetimeFormat = () =>{
   if(!board) return '';
@@ -95,7 +95,7 @@ const getWriteDatetimeFormat = () =>{
       return;
     }
     getBoardRequest(boardNumber).then(getBoardResponse);
-  }, [boardMock])
+  }, [])
 // render: 게시물 상세 상단 랜더링 //  
   if(!board) return <></>
     return (
@@ -154,7 +154,7 @@ const commentRef = useRef<HTMLTextAreaElement | null>(null);
 
 
 // function: getFavoriteListResponse 처리 함수//
-  const getFavoriteListResponse = (responseBody: GetFavoriteListResponseDto | ResponseDto | null) =>{
+  const getFavoriteListResponse = (responseBody: GetFavoriteListResponseDto | ResponseDto | null) => {
     if(!responseBody) return;
 
     const {code} = responseBody;
