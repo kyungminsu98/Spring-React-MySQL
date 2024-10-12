@@ -10,6 +10,8 @@ import com.yedam.board_back.entity.FavoriteEntity;
 import com.yedam.board_back.entity.primaryKey.FavoritePk;
 import com.yedam.board_back.repository.resultSet.GetFavoriteListResultSet;
 
+import jakarta.transaction.Transactional;
+
 @Repository
 public interface FavoriteRepository extends JpaRepository<FavoriteEntity, FavoritePk>{
     FavoriteEntity findByBoardNumberAndUserEmail(Integer boardNumber, String userEmail);
@@ -26,4 +28,7 @@ public interface FavoriteRepository extends JpaRepository<FavoriteEntity, Favori
         nativeQuery = true
     )
     List<GetFavoriteListResultSet> getFavoriteList(Integer boardNumber);
+
+    @Transactional
+    void deleteByBoardNumber(Integer boardNumber);
 }

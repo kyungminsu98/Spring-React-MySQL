@@ -3,6 +3,7 @@ package com.yedam.board_back.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yedam.board_back.dto.request.board.PostBoardRequestDto;
 import com.yedam.board_back.dto.request.board.PostCommentRequestDto;
+import com.yedam.board_back.dto.response.board.DeleteBoardResponseDto;
 import com.yedam.board_back.dto.response.board.GetBoardResponseDto;
 import com.yedam.board_back.dto.response.board.GetCommentListResponseDto;
 import com.yedam.board_back.dto.response.board.GetFavoriteListResponseDto;
@@ -89,6 +91,15 @@ public class BoardController {
         @PathVariable("boardNumber") Integer boardNumber
     ){
         ResponseEntity<? super IncreaseViewCountResponseDto> response = boardService.increaseViewCount(boardNumber);
+        return response;
+    }
+
+    @DeleteMapping("/{boardNumber}")
+    public ResponseEntity<? super DeleteBoardResponseDto> deleteBoard(
+        @PathVariable("boardNumber") Integer boardNumber,
+        @AuthenticationPrincipal String email
+    ){
+        ResponseEntity<? super DeleteBoardResponseDto> response = boardService.deleteBoard(boardNumber, email);
         return response;
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.yedam.board_back.dto.request.board.PostBoardRequestDto;
 import com.yedam.board_back.dto.request.board.PostCommentRequestDto;
+import com.yedam.board_back.dto.response.board.DeleteBoardResponseDto;
 import com.yedam.board_back.dto.response.board.GetBoardResponseDto;
 import com.yedam.board_back.dto.response.board.GetCommentListResponseDto;
 import com.yedam.board_back.dto.response.board.GetFavoriteListResponseDto;
@@ -26,4 +27,7 @@ public interface BoardService {
     ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber);
 
     ResponseEntity<? super IncreaseViewCountResponseDto> increaseViewCount(Integer boardNumber);
+
+    ResponseEntity<? super DeleteBoardResponseDto> deleteBoard(Integer boardNumber, String email);
+
 }
