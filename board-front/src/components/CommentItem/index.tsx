@@ -10,6 +10,7 @@ interface Props{
 export default function CommentItem({commentListItem}: Props) {
 // state: properties //
     const {nickname, profileImage, writeDatetime, content} = commentListItem;
+
 // function: 작성일 경과시간 함수 //
 const getElapsedTime = () => {
     const now = dayjs().add(9, 'hour');
@@ -19,8 +20,8 @@ const getElapsedTime = () => {
     if(gap < 3600) return `${Math.floor(gap / 60)}분 전`;
     if(gap < 86400) return `${Math.floor(gap / 3600)} 시간 전`;
     return `${Math.floor(gap / 86400)}일 전`;
-
 }
+
 // component: comment List Item 랜더링 //
   return (
     <div className='comment-list-item'>
