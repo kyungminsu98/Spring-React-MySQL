@@ -3,5 +3,4 @@ export default interface CommentListItem{
     profileImage: string | null;
     writeDatetime: string;
     content: string;
-
 }
