@@ -6,7 +6,6 @@ import Main from 'views/Main';
 import UserP from 'views/User';
 import Search from 'views/Search';
 import BoardDetail from 'views/Board/Detail';
-import BoardUpdate from 'views/Board/Update';
 import BoardWrite from 'views/Board/Write';
 import { AUTH_PATH, BOARD_DETAIL_PATH, BOARD_PATH, BOARD_UPDATE_PATH, BOARD_WRITE_PATH, MAIN_PATH, SEARCH_PATH, USER_PATH } from 'constant';
 import { useEffect } from 'react';
@@ -16,6 +15,7 @@ import { getSignInUserRequest } from 'apis';
 import { GetSignInUserResponseDto } from 'apis/response/user';
 import {ResponseDto} from 'apis/response';
 import { User } from 'types/interface'; // Assuming there's a User model defined
+import BoardUpdate from 'views/Board/Update';
 
 // component: Application 컴포넌트 //
 function App() {
