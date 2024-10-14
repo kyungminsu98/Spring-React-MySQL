@@ -1,5 +1,5 @@
 export default interface User{
-    email: string;
+    email:string;
     nickname:string;
     profileImage:string | null;
 }

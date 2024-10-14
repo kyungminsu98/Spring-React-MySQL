@@ -2,7 +2,6 @@ import axios from 'axios';
 import { SignInRequestDto, SignUpRequestDto } from './request/auth';
 import { ResponseDto } from './response';
 import { SignInResponseDto, SignUpResponseDto } from './response/auth';
-import { error } from 'console';
 import { GetSignInUserResponseDto } from './response/user';
 import { PostBoardRequestDto, PostCommentRequestDto } from './request/board';
 import { PostBoardResponseDto, GetBoardResponseDto, IncreaseViewCountResponseDto, GetFavoriteListResponseDto, GetCommentListResponseDto, PutFavoriteResponseDto, PostCommentResponseDto, DeleteBoardResponseDto  } from './response/board';
@@ -14,6 +13,7 @@ const API_DOMAIN = `${DOMAIN}/api/v1`;
 const authorization = (accessToken:string) =>{
     return {headers:{Authorization: `Bearer ${accessToken}`}}
 }
+
 
 const SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in`
 const SIGN_UP_URL = () => `${API_DOMAIN}/auth/sign-up`
@@ -164,19 +164,32 @@ export const postBoardRequest = async (requestBody:PostBoardRequestDto, accessTo
         })
     return result;
 }
-export const postCommentRequest = async (boardNumber: number | string, requestBody: PostCommentRequestDto, accessToken: string) =>{
-    const result = await axios.post<PostCommentResponseDto>(POST_COMMENT_URL(boardNumber), requestBody, authorization(accessToken))
-        .then(response => {
-            const responseBody: PostCommentResponseDto = response.data;
-            return responseBody;
-        })
-        .catch(error => {
-            if(!error.response) return null;
-            const responseBody: ResponseDto = error.response.data
-            return responseBody;
-        })
+export const postCommentRequest = async (boardNumber: number | string, requestBody: PostCommentRequestDto, accessToken: string) => {
+    console.log('Request Data:', requestBody);
+    console.log('Access Token:', accessToken);
+    console.log(POST_COMMENT_URL(boardNumber));
+    console.log(authorization(accessToken).headers);
+    
+    const result = await axios.post<PostCommentResponseDto>(
+        POST_COMMENT_URL(boardNumber), 
+        requestBody, 
+        authorization(accessToken) // 헤더를 요청의 config로 전달
+    )
+    .then(response => {
+        const responseBody: PostCommentResponseDto = response.data;
+        console.log('Response Data:', responseBody);
+        return responseBody;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        if (!error.response) return null;
+        const responseBody: ResponseDto = error.response.data;
+        return responseBody;
+    });
+
     return result;
-}
+};
+
 
 const FILE_DOMAIN = `${DOMAIN}/file`;
 const FILE_UPLOAD_URL = () => `${FILE_DOMAIN}/upload`;

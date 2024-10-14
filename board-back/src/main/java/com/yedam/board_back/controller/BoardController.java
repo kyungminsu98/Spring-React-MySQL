@@ -35,10 +35,10 @@ public class BoardController {
 
     @PostMapping("")
     public ResponseEntity<? super PostBoardResponseDto> postBoard(
-    @RequestBody @Valid PostBoardRequestDto requsetBody,
+    @RequestBody @Valid PostBoardRequestDto requestBody,
     @AuthenticationPrincipal String email
     ){
-        ResponseEntity<? super PostBoardResponseDto> response = boardService.postBoard(requsetBody, email);
+        ResponseEntity<? super PostBoardResponseDto> response = boardService.postBoard(requestBody, email);
         return response;
     }
 
@@ -60,7 +60,7 @@ public class BoardController {
         return response;
     }
 
-    @GetMapping("/{boardNumber}/favorite-lis")
+    @GetMapping("/{boardNumber}/favorite-list")
     public ResponseEntity<? super GetFavoriteListResponseDto> getFavoriteList(
         @PathVariable("boardNumber") Integer boardNumber
     ){
@@ -70,11 +70,11 @@ public class BoardController {
 
     @PostMapping("/{boardNumber}/comment")
     public ResponseEntity<? super PostCommentResponseDto> postComment(
-        @RequestBody @Valid PostCommentRequestDto requsetBody,
+        @RequestBody @Valid PostCommentRequestDto requestBody,
         @PathVariable("boardNumber") Integer boardNumber,
         @AuthenticationPrincipal String email
     ){
-        ResponseEntity<? super PostCommentResponseDto> response = boardService.postComment(requsetBody, boardNumber, email);
+        ResponseEntity<? super PostCommentResponseDto> response = boardService.postComment(requestBody, boardNumber, email);
         return response;
     }
     
