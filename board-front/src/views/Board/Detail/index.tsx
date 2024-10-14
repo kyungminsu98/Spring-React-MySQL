@@ -319,6 +319,7 @@ const postCommentResponse = (responseBody: PostCommentResponseDto | ResponseDto 
           </div>
           <div className='devider'></div>
           <div className='board-detail-bottom-comment-pagination-box'>
+            <Pagination />
           </div>
           {loginUser !== null &&
           <div className='board-detail-bottom-comment-input-box'>
