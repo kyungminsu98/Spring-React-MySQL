@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PostCommentRequestDto {
     @NotBlank
-    private String comment;
+    private String content;
     
 }

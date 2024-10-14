@@ -225,6 +225,7 @@ const putFavoriteResponse = (responseBody: GetFavoriteListResponseDto | Response
 const postCommentResponse = (responseBody: PostCommentResponseDto | ResponseDto | null) => {
   if(!responseBody) return;
   const { code } = responseBody;
+  console.log(responseBody)
   if(code === 'VF') alert('잘못된 접근입니다.');
   if(code === 'NU') alert('존재하지 않는 유저입니다.');
   if(code === 'NB') alert('존재하지 않는 게시물입니다.');

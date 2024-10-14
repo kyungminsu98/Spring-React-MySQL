@@ -169,6 +169,7 @@ export const postCommentRequest = async (boardNumber: number | string, requestBo
     console.log('Access Token:', accessToken);
     console.log(POST_COMMENT_URL(boardNumber));
     console.log(authorization(accessToken).headers);
+    console.log(authorization(accessToken));
     
     const result = await axios.post<PostCommentResponseDto>(
         POST_COMMENT_URL(boardNumber), 

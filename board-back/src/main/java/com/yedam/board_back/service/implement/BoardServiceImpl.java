@@ -167,7 +167,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public ResponseEntity<? super PostCommentResponseDto> postComment(PostCommentRequestDto dto, Integer boardNumber,String email) {
+    public ResponseEntity<? super PostCommentResponseDto> postComment(PostCommentRequestDto dto, Integer boardNumber, String email) {
         try{
             BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
             if(boardEntity == null) return PostCommentResponseDto.noExistBoard();
@@ -178,7 +178,7 @@ public class BoardServiceImpl implements BoardService {
             CommentEntity commentEntity = new CommentEntity(dto, boardNumber, email);
             commentRepository.save(commentEntity);
 
-            boardEntity.increaseCommentCount();;
+            boardEntity.increaseCommentCount();
             boardRepository.save(boardEntity);
             
         }catch(Exception exception){
