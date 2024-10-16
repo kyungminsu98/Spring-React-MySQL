@@ -15,10 +15,10 @@ export default function Top3Item({ top3listItem } : Props) {
     const {favoriteCount, commentCount, viewCount} = top3listItem;
     const {writeDatetime, writerNickname, writerProfileImage} = top3listItem;
 // function : 네이게이트 함수 //
-//    const navigator = useNavigate();
+//    const navigate = useNavigate();
 // event handler: 게시물 아이템 클릭 이벤트 처리 함수 //
     const onClickHandler = () => {
-//        navigator(boardNumber);
+//        navigate(boardNumber);
     }
 // component: Top3 List Item 랜더링 //
     return (

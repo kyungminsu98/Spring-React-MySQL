@@ -9,11 +9,11 @@ interface Props{
 }
 // component: Board List Item 컴포넌트 //
 export default function BoardItem({boardListItem}:Props) {
-// function: navigator 함수 //
- const navigator = useNavigate();
+// function: navigate 함수 //
+ const navigate = useNavigate();
 // event handler: 게시물 아이템 클릭 이벤트 처리 함수 //
  const onClickHandle=()=>{
-     navigator(boardNumber);
+     navigate(boardNumber);
  }
 
 // state: properties //

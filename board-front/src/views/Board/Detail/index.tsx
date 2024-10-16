@@ -27,7 +27,7 @@ const { loginUser } = useLoginUserStroe();
 // state: 쿠키 상태 //
 const [cookies, setCookies] = useCookies();
 // function: 네이게이트 함수 //
-const navigator = useNavigate();
+const navigate = useNavigate();
 // function: increaseViewCountResponse 처리함수 //
 const increaseViewCountResponse = (responseBody: IncreaseViewCountResponseDto | ResponseDto | null) => {
   if(!responseBody) return;
@@ -58,7 +58,7 @@ const getWriteDatetimeFormat = () =>{
     if(code === 'NB') alert('존재하지 않는 게시물입니다.');
     if(code === 'DBE') alert('데이터베이스 오류입니다.');
     if(code !== 'SU') {
-      navigator(MAIN_PATH());
+      navigate(MAIN_PATH());
       return;
     }
     const board: Board = {...responseBody as GetBoardResponseDto};
@@ -83,12 +83,12 @@ const deleteBoardResponse = (responseBody: DeleteBoardResponseDto | ResponseDto 
   if(code === 'DBE') alert('데이터 베이스 오류입니다.');
   if(code !== 'SU') return;
 
-  navigator(MAIN_PATH());
+  navigate(MAIN_PATH());
 }
 // event handler: 닉네임 클릭 이벤트 처리 //
   const onNicknameClickHandler = () => {
     if(!board) return;
-    navigator(USER_PATH(board.writerEmail));
+    navigate(USER_PATH(board.writerEmail));
   }    
 // event handler: more 버튼 클릭 이벤트 처리 //
   const onMoreButtonClickHandler = () => {
@@ -98,7 +98,7 @@ const deleteBoardResponse = (responseBody: DeleteBoardResponseDto | ResponseDto 
   const onUpdateButtonClickHandler = () => {
     if(!board || !loginUser) return;
     if(loginUser.email !== board.writerEmail) return;
-    navigator(BOARD_PATH() + '/' + BOARD_UPDATE_PATH(board.boardNumber))
+    navigate(BOARD_PATH() + '/' + BOARD_UPDATE_PATH(board.boardNumber))
 } 
 // event handler: 삭제 버튼 클릭 이벤트 처리 //
   const onDeleteButtonClickHandler = () => {
@@ -110,7 +110,7 @@ const deleteBoardResponse = (responseBody: DeleteBoardResponseDto | ResponseDto 
 // effect: 게시물 번호 path variable이 바뀔때 마다 게시물 불러오기 //
   useEffect(() => {
     if(!boardNumber){
-      navigator(MAIN_PATH());
+      navigate(MAIN_PATH());
       return;
     }
     getBoardRequest(boardNumber).then(getBoardResponse);

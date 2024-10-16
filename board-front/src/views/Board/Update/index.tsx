@@ -31,7 +31,7 @@ const [cookies, setCookies] = useCookies();
 const [imageUrls, setImageUrls] = useState<string[]>([]);
 
 // function 네비게이트 함수 //
-const navigator = useNavigate();
+const navigate = useNavigate();
 // function get board response 처리 함수 //
 const getBoardResponse = (responseBody:GetBoardResponseDto | ResponseDto | null) => {
   if(!responseBody) return;
@@ -39,7 +39,7 @@ const getBoardResponse = (responseBody:GetBoardResponseDto | ResponseDto | null)
   if(code === 'NB') alert('존재하지 않는 게시물입니다.');
   if(code === 'DBE') alert('데이터베이스 오류입니다.');
   if(code !== 'SU') {
-    navigator(MAIN_PATH());
+    navigate(MAIN_PATH());
     return;
   }
   const { title, content, boardImageList, writerEmail} = responseBody as GetBoardResponseDto;
@@ -49,7 +49,7 @@ const getBoardResponse = (responseBody:GetBoardResponseDto | ResponseDto | null)
   convertUrlsToFile(boardImageList).then(boardImageFileList => setBoardImageFileList(boardImageFileList));
 
   if(!loginUser || loginUser.email !== writerEmail){
-    navigator(MAIN_PATH());
+    navigate(MAIN_PATH());
     return;
   }
 
@@ -112,7 +112,7 @@ const onImageCloseButtonClickHandler = (deleteIndex:number) => {
 useEffect(() => {
   const accessToken = cookies.accessToken;
   if(!accessToken){
-    navigator(MAIN_PATH());
+    navigate(MAIN_PATH());
     return;
   }
   if(!boardNumber) return;
