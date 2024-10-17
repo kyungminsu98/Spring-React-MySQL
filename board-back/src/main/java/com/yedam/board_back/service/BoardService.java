@@ -10,6 +10,7 @@ import com.yedam.board_back.dto.response.board.GetBoardResponseDto;
 import com.yedam.board_back.dto.response.board.GetCommentListResponseDto;
 import com.yedam.board_back.dto.response.board.GetFavoriteListResponseDto;
 import com.yedam.board_back.dto.response.board.GetLatestBoardListResponseDto;
+import com.yedam.board_back.dto.response.board.GetTop3BoardListResponseDto;
 import com.yedam.board_back.dto.response.board.IncreaseViewCountResponseDto;
 import com.yedam.board_back.dto.response.board.PatchBoardResponseDto;
 import com.yedam.board_back.dto.response.board.PostBoardResponseDto;
@@ -32,6 +33,8 @@ public interface BoardService {
     ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber);
 
     ResponseEntity<? super GetLatestBoardListResponseDto> getLatestBoardList();
+
+    ResponseEntity<? super GetTop3BoardListResponseDto> getTop3BoardList();
 
     ResponseEntity<? super IncreaseViewCountResponseDto> increaseViewCount(Integer boardNumber);
 
