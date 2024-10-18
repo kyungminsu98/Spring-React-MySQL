@@ -5,15 +5,15 @@ import { BoardListItem } from 'types/interface';
 import { useNavigate } from 'react-router-dom';
 
 interface Props{
-    top3listItem: BoardListItem
+    top3ListItem: BoardListItem
 }
 // component: Top3 List Item 컴포넌트 //
-export default function Top3Item({ top3listItem } : Props) {
+export default function Top3Item({ top3ListItem } : Props) {
 
 // properties //
-    const {boardNumber, title, content, boardTitleImage} = top3listItem;
-    const {favoriteCount, commentCount, viewCount} = top3listItem;
-    const {writeDatetime, writerNickname, writerProfileImage} = top3listItem;
+    const {boardNumber, title, content, boardTitleImage} = top3ListItem;
+    const {favoriteCount, commentCount, viewCount} = top3ListItem;
+    const {writeDatetime, writerNickname, writerProfileImage} = top3ListItem;
 // function : 네이게이트 함수 //
 //    const navigate = useNavigate();
 // event handler: 게시물 아이템 클릭 이벤트 처리 함수 //
