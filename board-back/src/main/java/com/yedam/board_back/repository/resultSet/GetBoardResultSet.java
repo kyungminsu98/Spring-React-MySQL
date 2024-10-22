@@ -7,5 +7,5 @@ public interface GetBoardResultSet {
     String getWriteDatetime();
     String getWriterEmail();
     String getWriterNickname();
-    String getWrtierProfileImage();
+    String getWriterProfileImage();
 }

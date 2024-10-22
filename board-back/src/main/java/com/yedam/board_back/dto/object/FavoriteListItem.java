@@ -22,12 +22,13 @@ public class FavoriteListItem {
         this.nickname = resultSet.getNickname();
         this.profileImage = resultSet.getProfileImage();
     }
+
     public static List<FavoriteListItem> copyList(List<GetFavoriteListResultSet> resultSets){
         List<FavoriteListItem> list = new ArrayList<>();
-        for(GetFavoriteListResultSet resultSet: resultSets){
+        for(GetFavoriteListResultSet resultSet : resultSets){
             FavoriteListItem favoriteListItem = new FavoriteListItem(resultSet);
             list.add(favoriteListItem);
-        } 
+        }
         return list;
     }
 }

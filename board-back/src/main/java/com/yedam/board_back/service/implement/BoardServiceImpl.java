@@ -216,13 +216,14 @@ public class BoardServiceImpl implements BoardService {
     public ResponseEntity<? super GetLatestBoardListResponseDto> getLatestBoardList() {
         
         List<BoardListViewEntity> boardListViewEntities = new ArrayList<>();
-        
-        try{
+
+        try {
             boardListViewEntities = boardListViewRepository.findByOrderByWriteDatetimeDesc();
-        }catch(Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
+
         return GetLatestBoardListResponseDto.success(boardListViewEntities);
     }
 
@@ -235,7 +236,7 @@ public class BoardServiceImpl implements BoardService {
             Date beforeWeek = Date.from(Instant.now().minus(7, ChronoUnit.DAYS));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String sevenDaysAgo = simpleDateFormat.format(beforeWeek);
-            boardListViewEntities = boardListViewRepository.findTop3ByWriteDatetimeGreaterThanOrderByFavoriteCountDescCommentCountDescViewCountDesc(sevenDaysAgo);
+            boardListViewEntities = boardListViewRepository.findTop3ByWriteDatetimeGreaterThanOrderByFavoriteCountDescCommentCountDescViewCountDescWriteDatetimeDesc(sevenDaysAgo);
         }catch(Exception exception){
             exception.printStackTrace();
             return ResponseDto.databaseError();

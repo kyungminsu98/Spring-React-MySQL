@@ -10,9 +10,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="board_list_view")
-@Table(name="board_list_view")
+@Entity(name = "board_list_view")
+@Table(name = "board_list_view")
 public class BoardListViewEntity {
+    
     @Id
     private int boardNumber;
     private String title;
@@ -25,4 +26,5 @@ public class BoardListViewEntity {
     private String writerEmail;
     private String writerNickname;
     private String writerProfileImage;
+
 }

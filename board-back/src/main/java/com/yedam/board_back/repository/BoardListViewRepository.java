@@ -10,6 +10,5 @@ import com.yedam.board_back.entity.BoardListViewEntity;
 @Repository
 public interface BoardListViewRepository extends JpaRepository<BoardListViewEntity, Integer>{
     List<BoardListViewEntity> findByOrderByWriteDatetimeDesc();
-
-    List<BoardListViewEntity> findTop3ByWriteDatetimeGreaterThanOrderByFavoriteCountDescCommentCountDescViewCountDesc(String writeDatetime);
+    List<BoardListViewEntity> findTop3ByWriteDatetimeGreaterThanOrderByFavoriteCountDescCommentCountDescViewCountDescWriteDatetimeDesc(String writeDatetime);
 }

@@ -40,7 +40,7 @@ public class GetBoardResponseDto extends ResponseDto{
         this.writeDatetime = resultSet.getWriteDatetime();
         this.writerNickname = resultSet.getWriterNickname();
         this.writerEmail = resultSet.getWriterEmail();
-        this.writerProfileImage = resultSet.getWrtierProfileImage();
+        this.writerProfileImage = resultSet.getWriterProfileImage();
     }
     public static ResponseEntity<GetBoardResponseDto> success(GetBoardResultSet resultSet, List<ImageEntity> imageEntities){
         GetBoardResponseDto result = new GetBoardResponseDto(resultSet, imageEntities);

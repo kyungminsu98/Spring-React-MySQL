@@ -110,8 +110,8 @@ public class BoardController {
     }
 
     @GetMapping("/latest-list")
-    public ResponseEntity<? super GetLatestBoardListResponseDto> getLatestBoardList(){
-        ResponseEntity<? super GetLatestBoardListResponseDto> response =  boardService.getLatestBoardList();
+    public ResponseEntity<? super GetLatestBoardListResponseDto> getLatestBoardList() {
+        ResponseEntity<? super GetLatestBoardListResponseDto> response = boardService.getLatestBoardList();
         return response;
     }
 
