@@ -20,7 +20,7 @@ const onNaverButtonClickHandler = ()=>{
                         <div className='icon-box'>
                             <div className='icon logo-light-icon'></div>
                         </div>
-                        <div className='footer-logo-text'>{'Hoons Board'}</div>
+                        <div className='footer-logo-text'>{'Yedam Board'}</div>
                     </div>
                     <div className='footer-link-box'>
                         <div className='footer-email-link'>{'lacls159@gamil.com'}</div>
