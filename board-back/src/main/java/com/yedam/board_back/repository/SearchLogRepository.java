@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yedam.board_back.entity.SearchLogEntity;
 import com.yedam.board_back.repository.resultSet.GetPopularListResultSet;
+import com.yedam.board_back.repository.resultSet.GetRelationListResultSet;
 
 @Repository
 public interface SearchLogRepository extends JpaRepository<SearchLogEntity, Integer> {
@@ -23,5 +24,18 @@ public interface SearchLogRepository extends JpaRepository<SearchLogEntity, Inte
         nativeQuery = true
     )
     List<GetPopularListResultSet> getPopularList();
+    
+
+    @Query(
+        value = 
+        "SELECT search_word as searchWord, count(search_word) AS count " +
+        "FROM search_log " +
+        "WHERE search_word = ?1 " +
+        "GROUP BY search_word " +
+        "ORDER BY count desc " +
+        "LIMIT 15 ",
+        nativeQuery = true
+    )
+    List<GetRelationListResultSet> getRelationList(String searchWord);
     
 }
