@@ -10,11 +10,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor 
 @AllArgsConstructor
-@Entity(name="seacrh_log")
-@Table(name="seacrh_log")
+@Entity(name = "search_log")
+@Table(name = "search_log")
 public class SearchLogEntity {
+    
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int sequence;
     private String searchWord;
@@ -27,3 +28,4 @@ public class SearchLogEntity {
         this.relation = relation;
     }
 }
+

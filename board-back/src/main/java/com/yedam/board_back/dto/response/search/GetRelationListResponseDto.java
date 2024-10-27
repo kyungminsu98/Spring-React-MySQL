@@ -11,6 +11,9 @@ import com.yedam.board_back.common.ResponseMessage;
 import com.yedam.board_back.dto.response.ResponseDto;
 import com.yedam.board_back.repository.resultSet.GetRelationListResultSet;
 
+import lombok.Getter;
+
+@Getter
 public class GetRelationListResponseDto extends ResponseDto{
     
     private List<String> relativeWordList;

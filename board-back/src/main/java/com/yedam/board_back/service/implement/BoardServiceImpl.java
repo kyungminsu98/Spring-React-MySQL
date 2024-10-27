@@ -249,30 +249,28 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public ResponseEntity<? super GetSearchBoardListResponseDto> getSearchBoardList(String searchWord,
-            String preSearchWord) {
+    public ResponseEntity<? super GetSearchBoardListResponseDto> getSearchBoardList(String searchWord,String preSearchWord) {
         
         List<BoardListViewEntity> boardListViewEntities = new ArrayList<>();
 
-        try{
+        try {
+            
             boardListViewEntities = boardListViewRepository.findByTitleContainsOrContentContainsOrderByWriteDatetimeDesc(searchWord, searchWord);
 
             SearchLogEntity searchLogEntity = new SearchLogEntity(searchWord, preSearchWord, false);
             searchLogRepository.save(searchLogEntity);
-            
+
             boolean relation = preSearchWord != null;
-            if(relation){
-                searchLogEntity = new SearchLogEntity(preSearchWord, searchWord, false);
+            if (relation) {
+                searchLogEntity = new SearchLogEntity(preSearchWord, searchWord, relation);
                 searchLogRepository.save(searchLogEntity);
             }
 
-
-        }catch(Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
         return GetSearchBoardListResponseDto.success(boardListViewEntities);
-    
     }
 
 

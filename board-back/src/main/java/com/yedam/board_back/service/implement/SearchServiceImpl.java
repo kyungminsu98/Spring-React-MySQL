@@ -23,31 +23,36 @@ public class SearchServiceImpl implements SearchService {
     private final SearchLogRepository searchLogRepository;
 
     @Override
-    public ResponseEntity<? super GetPopularListResponseDto> getPopularList() { 
-
+    public ResponseEntity<? super GetPopularListResponseDto> getPopularList() {
+        
         List<GetPopularListResultSet> resultSets = new ArrayList<>();
 
         try {
+            
             resultSets = searchLogRepository.getPopularList();
-        } catch(Exception exception) {
+
+
+        } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
 
-        // 결과 데이터를 반환할 때 resultSets를 성공 응답에 포함
         return GetPopularListResponseDto.success(resultSets);
     }
 
     @Override
     public ResponseEntity<? super GetRelationListResponseDto> getRelationList(String searchWord) {
+        
         List<GetRelationListResultSet> resultSets = new ArrayList<>();
-        try{
+
+        try {
+                
             resultSets = searchLogRepository.getRelationList(searchWord);
-        }catch(Exception exception){
+
+        } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
         return GetRelationListResponseDto.success(resultSets);
     }
-    
 }

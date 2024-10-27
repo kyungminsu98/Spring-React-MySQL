@@ -11,8 +11,8 @@ import com.yedam.board_back.repository.resultSet.GetPopularListResultSet;
 import com.yedam.board_back.repository.resultSet.GetRelationListResultSet;
 
 @Repository
-public interface SearchLogRepository extends JpaRepository<SearchLogEntity, Integer> {
-    
+public interface SearchLogRepository extends JpaRepository<SearchLogEntity, Integer>{
+
     @Query(
         value = 
         "SELECT search_word as searchWord, count(search_word) AS count " +
@@ -25,15 +25,14 @@ public interface SearchLogRepository extends JpaRepository<SearchLogEntity, Inte
     )
     List<GetPopularListResultSet> getPopularList();
     
-
     @Query(
         value = 
-        "SELECT search_word as searchWord, count(search_word) AS count " +
+        "SELECT relation_word as searchWord, count(relation_word) AS count " +
         "FROM search_log " +
         "WHERE search_word = ?1 " +
         "AND relation_word IS NOT NULL " +
-        "GROUP BY search_word " +
-        "ORDER BY count desc " +
+        "GROUP BY relation_word " +
+        "ORDER BY count DESC " +
         "LIMIT 15 ",
         nativeQuery = true
     )
