@@ -23,6 +23,7 @@ import com.yedam.board_back.dto.response.board.GetFavoriteListResponseDto;
 import com.yedam.board_back.dto.response.board.GetLatestBoardListResponseDto;
 import com.yedam.board_back.dto.response.board.GetSearchBoardListResponseDto;
 import com.yedam.board_back.dto.response.board.GetTop3BoardListResponseDto;
+import com.yedam.board_back.dto.response.board.GetUserBoardListResponseDto;
 import com.yedam.board_back.dto.response.board.IncreaseViewCountResponseDto;
 import com.yedam.board_back.dto.response.board.PatchBoardResponseDto;
 import com.yedam.board_back.dto.response.board.PostBoardResponseDto;
@@ -119,6 +120,14 @@ public class BoardController {
     @GetMapping("/top-3")
     public ResponseEntity<? super GetTop3BoardListResponseDto> getTop3BoardList(){
         ResponseEntity<? super GetTop3BoardListResponseDto> response = boardService.getTop3BoardList();
+        return response;
+    }
+
+    @GetMapping("/user-board-list/{email}")
+    public ResponseEntity<? super GetUserBoardListResponseDto> getUserBoardList(
+        @PathVariable("email") String email
+    ){
+        ResponseEntity<? super GetUserBoardListResponseDto> response = boardService.getUserBoardList(email);
         return response;
     }
 

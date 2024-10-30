@@ -12,6 +12,7 @@ import com.yedam.board_back.dto.response.board.GetFavoriteListResponseDto;
 import com.yedam.board_back.dto.response.board.GetLatestBoardListResponseDto;
 import com.yedam.board_back.dto.response.board.GetSearchBoardListResponseDto;
 import com.yedam.board_back.dto.response.board.GetTop3BoardListResponseDto;
+import com.yedam.board_back.dto.response.board.GetUserBoardListResponseDto;
 import com.yedam.board_back.dto.response.board.IncreaseViewCountResponseDto;
 import com.yedam.board_back.dto.response.board.PatchBoardResponseDto;
 import com.yedam.board_back.dto.response.board.PostBoardResponseDto;
@@ -38,6 +39,8 @@ public interface BoardService {
     ResponseEntity<? super GetTop3BoardListResponseDto> getTop3BoardList();
     
     ResponseEntity<? super GetSearchBoardListResponseDto> getSearchBoardList(String searchWord, String preSearchWord);
+
+    ResponseEntity<? super GetUserBoardListResponseDto> getUserBoardList(String email);
 
     ResponseEntity<? super IncreaseViewCountResponseDto> increaseViewCount(Integer boardNumber);
 
